@@ -1,0 +1,16 @@
+.vscode/
+*.exe
+*.out
+*.o
+*.obj
+*.log
+*.tmp
+Thumbs.db
+.vscode/
+*.exe
+*.out
+*.o
+*.obj
+*.log
+*.tmp
+Thumbs.db
