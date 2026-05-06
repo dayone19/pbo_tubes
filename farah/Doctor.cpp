@@ -2,12 +2,12 @@
 
 class Doctor : public Person {
 public:
-    Doctor(string n, int i, string a) : Person(n, i, a) {}
+    Doctor(string nama, string id, string alamat) : Person(nama, id, alamat) {}
 
-    void displayInfo() override {
-        cout << "Doctor\n";
-        cout << "Nama: " << nama << endl;
-        cout << "ID: " << id << endl;
-        cout << "Alamat: " << alamat << endl;
-    }
+    // void displayInfo() override {
+    //     cout << "Doctor\n";
+    //     cout << "Nama: " << nama << endl;
+    //     cout << "ID: " << id << endl;
+    //     cout << "Alamat: " << alamat << endl;
+    // }
 };
