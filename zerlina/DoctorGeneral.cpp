@@ -1,4 +1,5 @@
 #include "DoctorGeneral.h"
+#include "Color.h"
 
 DoctorGeneral::DoctorGeneral(string nama, string id, string alamat)
     : Doctor(nama, id, alamat) {}
@@ -8,8 +9,8 @@ double DoctorGeneral::calculateFee() {
 }
 
 void DoctorGeneral::displayInfo() {
-    cout << "=== Dokter Umum ===\n";
-    cout << "Nama   : " << nama << endl;
-    cout << "ID     : " << id << endl;
-    cout << "Alamat : " << alamat << endl;
+    cout << hijau << "===== Dokter Umum =====\n" << reset;
+    cout << cyan_terang << "Nama   : " << nama << reset << endl;
+    cout << cyan_terang << "ID     : " << id << reset << endl;
+    cout << cyan_terang << "Alamat : " << alamat << reset << endl;
 }

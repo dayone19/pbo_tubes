@@ -1,4 +1,5 @@
 #include "QueueSystem.h"
+#include "Color.h"
 
 void QueueSystem::addQueue(string id) {
     antrian.push_back(id);
