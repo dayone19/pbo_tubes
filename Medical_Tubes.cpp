@@ -4,6 +4,14 @@
 #include <fstream> //untuk file hendling (gretha)
 using namespace std;
 
+string cyan = "\033[36m";
+string kuning = "\033[33m";
+string merah  = "\033[31m";
+string biruTerang   = "\033[94m";
+string hijauTerang  = "\033[92m";
+string bold = "\033[1m";
+string reset  = "\033[0m";
+
 //farah buat class & subclass
 class Person {
     public:
@@ -79,16 +87,34 @@ class Doctor : public Person {
     public:
     Doctor (string nama, string id, string alamat)
     : Person(nama, id, alamat){}
-    
-    //diplay infonya zer
-    // void displayInfo() override {
-    //     cout << "\n=== DOKTER SPESIALIS ===\n";
-    //     cout << "Nama       : " << nama << endl;
-    //     cout << "ID         : " << id << endl;
-    //     cout << "Alamat     : " << alamat << endl;
-    //     cout << "Biaya      : Rp " << calculateFee() << endl;
-    //     cout << "========================\n";
-    // }
+
+    virtual double calculateFee() = 0;
+};
+
+class DoctorGeneral : public Doctor {
+public:
+    DoctorGeneral(string nama, string id, string alamat)
+        : Doctor(nama, id, alamat) {}
+
+    double calculateFee() override { return 100000; }
+
+    void displayInfo() {
+        cout << "=== Dokter Umum ===\n";
+        cout << "Nama   : " << nama << endl;
+    }
+};
+
+class DoctorSpecialist : public Doctor {
+public:
+    DoctorSpecialist(string nama, string id, string alamat)
+        : Doctor(nama, id, alamat) {}
+
+    double calculateFee() override { return 200000; }
+
+    void displayInfo() {
+        cout << "=== Dokter Spesialis ===\n";
+        cout << "Nama   : " << nama << endl;
+    }
 };
 
 //farah

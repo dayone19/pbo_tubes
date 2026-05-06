@@ -18,3 +18,11 @@ using namespace std;
 
 #include "gretha/FileHandler.cpp"
 #include "gretha/CustomException.cpp"
+
+string cyan = "\033[36m";
+string kuning = "\033[33m";
+string merah  = "\033[31m";
+string biruTerang   = "\033[94m";
+string hijauTerang  = "\033[92m";
+string bold = "\033[1m";
+string reset  = "\033[0m";
