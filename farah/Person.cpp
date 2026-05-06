@@ -3,15 +3,23 @@ using namespace std;
 
 class Person {
 protected:
-    string nama;
-    int id;
-    string alamat;
+    string nama,
+           id,
+           alamat;
 
 public:
-    Person(string n, int i, string a) {
-        nama = n;
-        id = i;
-        alamat = a;
+    Person(string nama, string id, string alamat) {
+        this->nama = nama;
+        this->id = id;
+        this->alamat = alamat;
+    }
+        
+    string getID() {
+        return id;
+    }
+
+    string getNama() {
+        return nama;
     }
 
     virtual void displayInfo() = 0; // pure virtual

@@ -1,7 +1,7 @@
 #include <iostream>
-#include <vector> //untuk penggunaan vector
-#include <map> //untuk penggunaan map
-#include <fstream> //untuk file hendling
+#include <vector> //untuk penggunaan vector (yoan)
+#include <map> //untuk penggunaan map (yoan)
+#include <fstream> //untuk file hendling (gretha)
 using namespace std;
 
 //farah buat class & subclass
@@ -14,9 +14,19 @@ class Person {
 
     //untuk input pasien saat mau registrasi
     //parameter constructor dengan initializer list we
-    Person(string nama, string id, string alamat) 
-        : nama(nama), id(id), alamat(alamat) {}
-    
+    Person(string nama, string id, string alamat) {
+        this->nama = nama;
+        this->id = id;
+        this->alamat = alamat;
+    }
+        
+    string getID() {
+        return id;
+    }
+
+    string getNama() {
+        return nama;
+    }
 
     virtual void displayInfo() = 0;
 
