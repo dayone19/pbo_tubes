@@ -1,14 +1,15 @@
-#include "Doctor.cpp"
+#include "DoctorGeneral.h"
 
-class DoctorGeneral : public Doctor {
-public:
-    DoctorGeneral(string nama, string id, string alamat)
-        : Doctor(nama, id, alamat) {}
+DoctorGeneral::DoctorGeneral(string nama, string id, string alamat)
+    : Doctor(nama, id, alamat) {}
 
-    double calculateFee() override { return 100000; }
+double DoctorGeneral::calculateFee() {
+    return 100000; 
+}
 
-    void displayInfo() {
-        cout << "=== Dokter Umum ===\n";
-        cout << "Nama   : " << nama << endl;
-    }
-};
+void DoctorGeneral::displayInfo() {
+    cout << "=== Dokter Umum ===\n";
+    cout << "Nama   : " << nama << endl;
+    cout << "ID     : " << id << endl;
+    cout << "Alamat : " << alamat << endl;
+}

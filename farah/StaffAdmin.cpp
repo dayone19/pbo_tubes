@@ -1,34 +1,29 @@
-#include "Person.cpp"
+#include "StaffAdmin.h"
 
-class StaffAdmin : public Person {
-    private:
-    string jabatan;
+StaffAdmin::StaffAdmin(string nama, string id, string alamat)
+    : Person(nama, id, alamat) {}
 
-    public:
-        StaffAdmin(string nama, string id, string alamat) : Person(nama, id, alamat) {}
+void StaffAdmin::setJabatan(string x) {
+    jabatan = x;
+}
 
-    void setJabatan(string x) {
-        jabatan = x;
-    }
+string StaffAdmin::getJabatan() {
+    return jabatan;
+}
 
-    string getJabatan() {
-        return jabatan;
-    }
+string StaffAdmin::getID() {
+    return id;
+}
 
-    string getID() {
-        return id;
-    }
+string StaffAdmin::getNama() {
+    return nama;
+}
 
-    string getNama() {
-        return nama;
-    }
-
-    void displayInfo() override {
-        cout << "\n===== STAFF ADMIN =====\n";
-        cout << "Nama       : " << nama << endl;
-        cout << "ID         : " << id << endl;
-        cout << "Alamat     : " << alamat << endl;
-        cout << "Jabatan    : " << jabatan << endl;
-        cout << "=======================\n";
-    }
-};
+void StaffAdmin::displayInfo() {
+    cout << "\n===== STAFF ADMIN =====\n";
+    cout << "Nama       : " << nama << endl;
+    cout << "ID         : " << id << endl;
+    cout << "Alamat     : " << alamat << endl;
+    cout << "Jabatan    : " << jabatan << endl;
+    cout << "=======================\n";
+}

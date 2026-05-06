@@ -1,8 +1,6 @@
-#include "Person.cpp"
+#include "Doctor.h"
 
-class Doctor : public Person {
-public:
-    Doctor(string nama, string id, string alamat) : Person(nama, id, alamat) {}
-
-    virtual double calculateFee() = 0;
-};
+Doctor::Doctor(string nama, string id, string alamat)
+    : Person(nama, id, alamat) {
+        
+    }

@@ -1,28 +1,19 @@
-#include <iostream>
-using namespace std;
+#include "Person.h"
 
-class Person {
-protected:
-    string nama,
-           id,
-           alamat;
+Person::Person(string nama, string id, string alamat) {
+    this->nama = nama;
+    this->id = id;
+    this->alamat = alamat;
+}
 
-public:
-    Person(string nama, string id, string alamat) {
-        this->nama = nama;
-        this->id = id;
-        this->alamat = alamat;
-    }
-        
-    string getID() {
-        return id;
-    }
+string Person::getID() {
+    return id;
+}
 
-    string getNama() {
-        return nama;
-    }
+string Person::getNama() {
+    return nama;
+}
 
-    virtual void displayInfo() = 0; // pure virtual
-
-    virtual ~Person() {}
-};
+Person::~Person() {
+    
+}
