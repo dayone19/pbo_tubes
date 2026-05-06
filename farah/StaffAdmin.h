@@ -7,19 +7,19 @@
 using namespace std;
 
 class StaffAdmin : public Person {
-private:
-    string jabatan;
+    private:
+        string jabatan;
 
-public:
-    StaffAdmin(string nama, string id, string alamat);
+    public:
+        StaffAdmin(string nama, string id, string alamat);
 
-    void setJabatan(string x);
-    string getJabatan();
+        void setJabatan(string x);
+        string getJabatan();
 
-    string getID();
-    string getNama();
+        string getID();
+        string getNama();
 
-    void displayInfo() override;
+        void displayInfo() override;
 };
 
 #endif

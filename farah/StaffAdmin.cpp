@@ -20,7 +20,7 @@ string StaffAdmin::getNama() {
 }
 
 void StaffAdmin::displayInfo() {
-    cout << "\n===== STAFF ADMIN =====\n";
+
     cout << "Nama       : " << nama << endl;
     cout << "ID         : " << id << endl;
     cout << "Alamat     : " << alamat << endl;

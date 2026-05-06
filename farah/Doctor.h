@@ -4,10 +4,10 @@
 #include "Person.h"
 
 class Doctor : public Person {
-public:
-    Doctor(string nama, string id, string alamat);
+    public:
+        Doctor(string nama, string id, string alamat);
 
-    virtual double calculateFee() = 0; // pure virtual function
+        virtual double calculateFee() = 0; // pure virtual function
 };
 
 #endif

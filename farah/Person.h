@@ -6,19 +6,19 @@
 using namespace std;
 
 class Person {
-protected:
-    string nama;
-    string id;
-    string alamat;
+    protected:
+        string nama;
+        string id;
+        string alamat;
 
-public:
-    Person(string nama, string id, string alamat);
+    public:
+        Person(string nama, string id, string alamat);
 
-    string getID();
-    string getNama();
+        string getID();
+        string getNama();
 
-    virtual void displayInfo() = 0; 
-    virtual ~Person();
+        virtual void displayInfo() = 0; 
+        virtual ~Person();
 };
 
 #endif

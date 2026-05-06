@@ -7,11 +7,11 @@
 using namespace std;
 
 class DoctorSpecialist : public Doctor {
-public:
-    DoctorSpecialist(string nama, string id, string alamat);
+    public:
+        DoctorSpecialist(string nama, string id, string alamat);
 
-    double calculateFee() override;
-    void displayInfo() override;
+        double calculateFee() override;
+        void displayInfo() override;
 };
 
 #endif
