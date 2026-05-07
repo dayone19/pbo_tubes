@@ -1,7 +1,7 @@
 #ifndef DOCTORGENERAL_H
 #define DOCTORGENERAL_H
 
-#include "Doctor.h"
+#include "../farah/Doctor.h"
 #include <iostream>
 #include <string>
 using namespace std;

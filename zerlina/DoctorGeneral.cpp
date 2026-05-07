@@ -1,5 +1,5 @@
 #include "DoctorGeneral.h"
-#include "Color.h"
+#include "color.h"
 
 DoctorGeneral::DoctorGeneral(string nama, string id, string alamat)
     : Doctor(nama, id, alamat) {}
