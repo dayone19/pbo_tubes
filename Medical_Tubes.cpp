@@ -154,11 +154,22 @@ class StaffAdmin : public Person {
 
 //elysta buat billing untuk hitung biaya dokter yag dibuat zer dan biaya obat nya
 class Billing {
-    private:
+private:
     double total;
 
-    public:
+public:
+    Billing(double t = 0) {
+        total = t;
+    }
 
+    Billing operator+(const Billing& b) {
+        return Billing(total + b.total);
+    }
+
+    friend ostream& operator<<(ostream& out, const Billing& b) {
+        out << "Total Biaya : Rp " << b.total;
+        return out;
+    }
 };
 
 
@@ -351,7 +362,12 @@ int main() {
                             system("cls");
 
                             cout << "----- PEMBAYARAN  -----" << endl;
-                            //billing(tunggu elysta)
+                            Billing b1(100000);
+                            Billing b2(50000);
+
+                            Billing total = b1 + b2;
+
+                            cout << total << endl;
 
                         } else if(pilihan == 4) {
                             system("cls");
