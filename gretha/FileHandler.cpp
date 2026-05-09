@@ -1,4 +1,5 @@
 #include "FileHandler.h"
+#include "../color.h"
 
 void FileHandler::log(string text) {
     ofstream file("hospital_log.txt", ios::app);

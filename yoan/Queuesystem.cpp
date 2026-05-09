@@ -6,16 +6,16 @@ void QueueSystem::addQueue(string id) {
 }
 
 void QueueSystem::showQueue() {
-    if (antrian.empty()) {
-        cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-        cout << "----- BELUM ADA ANTRIAN HARI INI -----" << endl;
-        cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-    } else {
-        cout << "++++++++++++++++++" << endl;
-        cout << "\n--- ANTRIAN ---\n";
-        cout << "++++++++++++++++++" << endl;
-        for (int i = 0; i < antrian.size(); i++) {
-            cout << i + 1 << ". " << antrian[i] << endl;
+    if(antrian.empty()) { 
+            cout << turquoise << "+++++++++++++++++++++++++++++++++++++" << endl;
+            cout << "---- " << putih << "BELUM ADA ANTRIAN HARI INI" << turquoise << " ----" << endl;
+            cout << turquoise << "+++++++++++++++++++++++++++++++++++++" << endl;
+        } else {
+            cout << hijauTerang << "++++++++++++++++++++++++" << reset << endl;
+            cout << hijauTerang << " ------" << salmon << " ANTRIAN " << hijauTerang <<  "------ \n";
+            cout << hijauTerang << "++++++++++++++++++++++++" << reset << endl;
+            for (int i = 0; i < antrian.size(); i++) {
+                cout << i + 1 << ". " << antrian[i] << endl;
         }
     }
 }

@@ -1,4 +1,5 @@
 #include "StaffAdmin.h"
+#include "../color.h"
 
 StaffAdmin::StaffAdmin(string nama, string id, string alamat)
     : Person(nama, id, alamat) {}
@@ -25,5 +26,5 @@ void StaffAdmin::displayInfo() {
     cout << "ID         : " << id << endl;
     cout << "Alamat     : " << alamat << endl;
     cout << "Jabatan    : " << jabatan << endl;
-    cout << "=======================\n";
+    cout << hijauTerang << "============================\n" << reset;
 }

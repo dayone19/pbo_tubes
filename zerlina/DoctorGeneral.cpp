@@ -9,8 +9,8 @@ double DoctorGeneral::calculateFee() {
 }
 
 void DoctorGeneral::displayInfo() {
-    cout << hijau << "===== Dokter Umum =====\n" << reset;
-    cout << cyan_terang << "Nama   : " << nama << reset << endl;
-    cout << cyan_terang << "ID     : " << id << reset << endl;
-    cout << cyan_terang << "Alamat : " << alamat << reset << endl;
+    cout << hijauTerang << "===== Dokter Umum =====\n" << reset;
+    cout << cyanTerang << "Nama   : " << nama << reset << endl;
+    cout << cyanTerang << "ID     : " << id << reset << endl;
+    cout << cyanTerang << "Alamat : " << alamat << reset << endl;
 }

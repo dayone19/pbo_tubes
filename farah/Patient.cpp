@@ -1,4 +1,5 @@
 #include "Patient.h"
+#include "../color.h"
 
 Patient::Patient() : Person("", "", "") {
 }
@@ -37,10 +38,10 @@ void Patient::setPaid(bool status) {
 }
 
 void Patient::displayInfo() {
-    cout << "\n===== DATA PASIEN =====\n";
-    cout << "Nama       : " << nama << endl;
-    cout << "ID         : " << id << endl;
-    cout << "Alamat     : " << alamat << endl;
-    cout << "Diagnosis  : " << diagnosis << endl;
-    cout << "=======================\n";
+    cout << magentaTerang << "\n======= DATA PASIEN =======" << reset << endl;
+        cout << "Nama       : " << nama << endl;
+        cout << "ID         : " << id << endl;
+        cout << "Alamat     : " << alamat << endl;
+        cout << "Diagnosis  : " << diagnosis << endl;
+        cout << magentaTerang << "===========================" << reset << endl;
 }

@@ -1,5 +1,6 @@
 #include "billing.h"
 #include <iostream>
+#include "../color.h"
 using namespace std;
 
 Billing::Billing(double t) {
@@ -11,8 +12,9 @@ Billing Billing::operator+(const Billing& b) {
 }
 
 ostream& operator<<(ostream& out, const Billing& b) {
-    out << "\033[1;34mTotal Biaya: \033[1;32mRp "
+        out << magentaTerang << "Total Biaya : Rp "
         << b.total
-        << "\033[0m";
-    return out;
-}
+        << reset
+        << endl;
+        return out;
+    }

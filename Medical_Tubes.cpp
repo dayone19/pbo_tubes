@@ -4,13 +4,20 @@
 #include <fstream> //untuk file hendling (gretha)
 using namespace std;
 
-string cyan = "\033[36m";
-string kuning = "\033[33m";
-string merah  = "\033[31m";
-string biruTerang   = "\033[94m";
-string hijauTerang  = "\033[92m";
-string bold = "\033[1m";
-string reset  = "\033[0m";
+string cyanTerang    = "\033[96m";
+string kuningTerang  = "\033[93m";
+string hijauTerang   = "\033[92m";
+string magentaTerang = "\033[95m";
+string putih         = "\033[37m";
+string unguMuda      = "\033[38;2;200;120;255m";
+string turquoise     = "\033[38;2;64;224;208m";
+string salmon        = "\033[38;2;250;128;114m";
+string navy          = "\033[38;2;0;0;128m";
+string lavender      = "\033[38;2;230;190;255m";
+string peach         = "\033[38;2;255;218;185m";
+string softPink      = "\033[38;2;255;192;203m";
+string bold          = "\033[1m";
+string reset         = "\033[0m";
 
 //farah buat class & subclass
 class Person {
@@ -87,12 +94,12 @@ class Patient : public Person {
     }
 
     void displayInfo() override {
-        cout << "\n===== DATA PASIEN =====\n";
+        cout << magentaTerang << "\n======= DATA PASIEN =======" << reset << endl;
         cout << "Nama       : " << nama << endl;
         cout << "ID         : " << id << endl;
         cout << "Alamat     : " << alamat << endl;
         cout << "Diagnosis  : " << diagnosis << endl;
-        cout << "=======================\n";
+        cout << magentaTerang << "=============================" << reset << endl;
     }
 
 };
@@ -115,8 +122,8 @@ public:
     double calculateFee() override { return 100000; }
 
     void displayInfo() {
-        cout << "=== Dokter Umum ===\n";
-        cout << "Nama   : " << nama << endl;
+        cout << hijauTerang << "======= Dokter Umum =======\n" << reset;
+        cout << cyanTerang << "Nama   : " << nama << reset << endl;
     }
 };
 
@@ -128,8 +135,8 @@ public:
     double calculateFee() override { return 200000; }
 
     void displayInfo() {
-        cout << "=== Dokter Spesialis ===\n";
-        cout << "Nama   : " << nama << endl;
+         cout << hijauTerang << "======= Dokter Spesialis =======\n" << reset;
+        cout << cyanTerang << "Nama   : " << nama << reset << endl;
     }
 };
 
@@ -164,7 +171,7 @@ class StaffAdmin : public Person {
         cout << "ID         : " << id << endl;
         cout << "Alamat     : " << alamat << endl;
         cout << "Jabatan    : " << jabatan << endl;
-        cout << "=======================\n";
+        cout << hijauTerang << "============================\n" << reset;
     }
 };
 
@@ -183,7 +190,7 @@ public:
     }
 
     friend ostream& operator<<(ostream& out, const Billing& b) {
-        out << "Total Biaya : Rp " << b.total;
+        out << magentaTerang << "Total Biaya : Rp " << b.total << reset << endl;
         return out;
     }
 };
@@ -213,13 +220,13 @@ class QueueSystem {
 
     void showQueue() {
         if(antrian.empty()) { 
-            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-            cout << "----- BELUM ADA ANTRIAN HARI INI -----" << endl;
-            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+            cout << turquoise << "+++++++++++++++++++++++++++++++++++++" << endl;
+            cout << "---- " << putih << "BELUM ADA ANTRIAN HARI INI" << turquoise << " ----" << endl;
+            cout << turquoise << "+++++++++++++++++++++++++++++++++++++" << endl;
         } else {
-            cout << "++++++++++++++++++" << endl;
-            cout << " --- ANTRIAN ---\n";
-            cout << "++++++++++++++++++" << endl;
+            cout << hijauTerang << "++++++++++++++++++++++++" << reset << endl;
+            cout << hijauTerang << " ------" << salmon << " ANTRIAN " << hijauTerang <<  "------ \n";
+            cout << hijauTerang << "++++++++++++++++++++++++" << reset << endl;
             for (int i = 0; i < antrian.size(); i++) {
                 cout << i + 1 << ". " << antrian[i] << endl;
             }
@@ -345,33 +352,35 @@ int main() {
     int pilihan;
 
     do {
-        cout << "============================ " << endl;
-        cout << "---- ++ MEDICAL LINK ++ ---- " << endl;
-        cout << "     -- LOGIN ACCESS --      " << endl;
-        cout << "| 1. Staff Admin            |"  << endl;
-        cout << "| 2. Doctor                 |"  << endl;
-        cout << "| 3. Patient                |"  << endl;
-        cout << "| 4. Exit                   |"  << endl;
-        cout << "============================" << endl;
+        cout << cyanTerang << "\n ================================" << reset << endl;
+        cout << cyanTerang << "|" << peach << "    -- ++ MEDICAL LINK ++ --    " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << "|" << peach << "       -- LOGIN ACCESS --       " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << "|--------------------------------|" << reset << endl;
+        cout << cyanTerang << "|" << putih << " 1. Staff Admin                 " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << "|" << putih << " 2. Doctor                      " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << "|" << putih << " 3. Patient                     " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << "|" << putih << " 4. Exit                        " << cyanTerang << "|" << reset << endl;
+        cout << cyanTerang << " ================================" << reset << endl;
 
-        cout << "Masukkan Input ---- : ";
+        cout << navy << "Masukkan Input [1-4] : " << reset;
         cin >> role;
 
         if (role == 1) {
             do {
 
-                    cout << "============================ " << endl;
-                    cout << "-- ++ STAFF ADMIN PAGE ++ -- " << endl;
-                    cout << "| 1. Registrasi Pasien      |"  << endl;
-                    cout << "| 2. Tambah Antrian         |"  << endl;
-                    cout << "| 3. Billing                |"  << endl;
-                    cout << "| 4. Lihat Antrian          |"  << endl;
-                    cout << "| 5. Lihat Staff Admin      |"  << endl;
-                    cout << "| 6. Lihat Aktivitas        |"  << endl;
-                    cout << "| 7. Exit                   |"  << endl;
-                    cout << "============================ " << endl;
+                    cout << kuningTerang << "\n ================================ " << reset << endl;
+                    cout << kuningTerang << "|" << softPink << "  -- ++ STAFF ADMIN PAGE ++ --  " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|--------------------------------|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 1. Registrasi Pasien           " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 2. Tambah Antrian              " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 3. Billing                     " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 4. Lihat Antrian               " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 5. Lihat Staff Admin           " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 6. Lihat Aktivitas             " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 7. Exit                        " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << " ================================ " << reset << endl;
 
-                    cout << "Masukkan Input ---- : ";
+                    cout << navy << "Masukkan Input [1-7] : " << reset;
                     cin >> pilihan;
 
                     try {
@@ -380,7 +389,7 @@ int main() {
                             system("cls");
                             string nama, id, alamat;
 
-                            cout << "----- REGISTRASI PASIEN  -----" << endl;
+                            cout << lavender << "----- " << kuningTerang << "REGISTRASI PASIEN" << lavender << " -----" << reset << endl;
                             cout << "Nama Pasien   : "; cin >> nama;
                             cout << "ID Pasien     : "; cin >> id;
                             cout << "Alamat Pasien : "; cin >> alamat;
@@ -390,15 +399,15 @@ int main() {
 
                             FileHandler::log("Registrasi: " + nama);
                             cout << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-                            cout << "-----    REGISTRASI BERHASIL     -----" << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << "-----" << putih << "    REGISTRASI BERHASIL     " << turquoise << "-----" << endl;
+                            cout << "++++++++++++++++++++++++++++++++++++++" << reset << endl;
 
                         } else if(pilihan == 2) {
                             system("cls");
                             string id;
 
-                            cout << "----- TAMBAH ANTRIAN  -----" << endl;
+                            cout << lavender << "----- " << kuningTerang << "TAMBAH ANTRIAN" << lavender << " -----" << reset << endl;
                             cout << "Masukkan ID Pasien : ";
                             cin >> id;
 
@@ -411,15 +420,15 @@ int main() {
                             queue.addQueue(id);
 
                             cout << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-                            cout << "-----  TAMBAH ANTRIAN BERHASIL   -----" << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << "-----" << putih << "  TAMBAH ANTRIAN BERHASIL   " << turquoise << "-----" << endl;
+                            cout << "++++++++++++++++++++++++++++++++++++++" << reset << endl;
 
                         } else if(pilihan == 3) {
                             system("cls");
 
                             string id;
-                            cout << "Masukkan ID Pasien: ";
+                            cout << lavender << "Masukkan ID Pasien: " << reset;
                             cin >> id;
 
                             Patient* p = db.find(id);
@@ -454,7 +463,7 @@ int main() {
 
                             double biayaDokter = d->calculateFee();
 
-                            cout << "\n=== DETAIL BIAYA ===\n";
+                            cout << unguMuda << "\n========== DETAIL BIAYA ==========\n" << reset << endl;
                             cout << "Nama Pasien       : " << p->getNama() << endl;
                             cout << "Nama Dokter       : " << d->getNama() << endl;
                             cout << "Biaya Konsultasi  : Rp " << biayaDokter << endl;
@@ -462,7 +471,7 @@ int main() {
 
                             Billing total = Billing(biayaDokter) + Billing(biayaObat);
 
-                            cout << "--------------------------\n";
+                            cout << unguMuda << "-------------------------------\n" << reset << endl;
                             cout << total << endl;
 
                             p->setPaid(true);
@@ -472,10 +481,10 @@ int main() {
                             FileHandler::log("Pembayaran pasien: " + p->getNama());
 
                             cout << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-                            cout << "-----    PEMBAYARAN BERHASIL     -----" << endl;
-                            cout << "----  Pasien Keluar Dari Antrian  ----" << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << "-----" << putih << "    PEMBAYARAN BERHASIL     " << turquoise << "-----" << endl;
+                            cout << "----" << putih << "  Pasien Keluar Dari Antrian  " << turquoise << "----" << endl;
+                            cout << "++++++++++++++++++++++++++++++++++++++" << reset << endl;
 
                             delete d;
 
@@ -485,8 +494,8 @@ int main() {
                             
                         } else if(pilihan == 5) {
                             system("cls");
-                            cout << "============================ " << endl;
-                            cout << "-- ++ DATA STAFF ADMIN ++ -- " << endl;
+                            cout << hijauTerang << "============================ " << endl;
+                            cout << hijauTerang << "-- ++ " << salmon << "DATA STAFF ADMIN" << hijauTerang << " ++ --" << reset << endl;
 
                             for (int i = 0; i < staffList.size(); i++) {
                                 staffList[i].displayInfo();
@@ -498,8 +507,8 @@ int main() {
                             ifstream file("hospital_log.txt");
                             string line;
 
-                            cout << "============================== " << endl;
-                            cout << "-- ++ AKTIVITAS HARI INI ++ -- " << endl;
+                            cout << hijauTerang << "============================== " << endl;
+                            cout << hijauTerang << "-- ++ " << salmon << "AKTIVITAS HARI INI" << hijauTerang << " ++ -- " << reset << endl;
 
                             while (getline(file, line)) {
                                 cout << line << endl;
@@ -515,15 +524,16 @@ int main() {
         } else if(role == 2) {
 
             do {
-                    cout << "============================ " << endl;
-                    cout << "---- ++ DOCTOR  PAGE ++ ---- " << endl;
-                    cout << "| 1. Diagnosis              |"  << endl;
-                    cout << "| 2. Cari Pasien            |"  << endl;
-                    cout << "| 3. Lihat Rekam Medis      |"  << endl;
-                    cout << "| 4. Exit                   |"  << endl;
-                    cout << "============================ " << endl;
+                    cout << kuningTerang << "\n ============================ " << reset << endl;
+                    cout << kuningTerang << "|" << peach << "  -- ++ DOCTOR  PAGE ++ --  " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|----------------------------|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 1. Diagnosis               " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << "|" << putih << " 2. Cari Pasien             " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << "|" << putih << " 3. Lihat Rekam Medis       " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << "|" << putih << " 4. Exit                    " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << "Masukkan Input ---- : ";
+                    cout << navy << "Masukkan Input [1-4] : " << reset;
                     cin >> pilihan;
 
                     try {
@@ -532,7 +542,7 @@ int main() {
                             system("cls");
                             string id, diag;
 
-                            cout << "----- DIAGNOSIS PASIEN  -----" << endl;
+                            cout << lavender << "----- DIAGNOSIS PASIEN  -----" << reset << endl;
                             cout << "Masukkan ID Pasien : ";
                             cin >> id;
 
@@ -549,15 +559,15 @@ int main() {
                             FileHandler::saveBinary(*p);
 
                             cout << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-                            cout << "-----   SET DIAGNOSIS BERHASIL   -----" << endl;
-                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << "-----" << putih << "   SET DIAGNOSIS BERHASIL   " << turquoise << "-----" << endl;
+                            cout << "++++++++++++++++++++++++++++++++++++++" << reset << endl;
 
                         } else if(pilihan == 2) {
                             system("cls");
                             string id;
 
-                            cout << "----- CARI PASIEN  -----" << endl;
+                            cout << lavender << "----- CARI PASIEN  -----" << reset << endl;
                             cout << "Masukkan ID Pasien : ";
                             cin >> id;
 
@@ -567,7 +577,7 @@ int main() {
                                 throw CustomException("Data tidak ditemukan!");
 
                             if (p->isPaid()) {
-                                throw CustomException("Pasien sudah keluar dari karena sudah melakukan pembayaran!");
+                                throw CustomException("Pasien sudah keluar dari rumah sakit karena sudah melakukan pembayaran!");
                             }
 
 
@@ -575,8 +585,8 @@ int main() {
 
                         } else if(pilihan == 3) {
                             system("cls");
-                            cout << "============================ " << endl;
-                            cout << "-- ++    REKAM MEDIS   ++ -- " << endl;
+                            cout << hijauTerang << "================================ " << endl;
+                            cout << " -- ++ " << cyanTerang << "   REKAM MEDIS   " << hijauTerang << " ++ --  " << reset << endl;
                             FileHandler::readBinary();
                         }
 
@@ -589,13 +599,14 @@ int main() {
         } else if(role == 3) {
 
             do {
-                    cout << "============================ " << endl;
-                    cout << "---- ++ PATIENT PAGE ++ ---- " << endl;
-                    cout << "| 1. lihat Antrian          |"  << endl;
-                    cout << "| 2. Exit                   |"  << endl;
-                    cout << "============================ " << endl;
+                    cout << kuningTerang << "\n ============================ " << reset << endl;
+                    cout << kuningTerang << "|" << peach << "  -- ++ PATIENT PAGE ++ --  " << kuningTerang << "|" << reset << endl;
+                    cout << kuningTerang << "|----------------------------|" << reset << endl;
+                    cout << kuningTerang << "|" << putih << " 1. Lihat Antrian           " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << "|" << putih << " 2. Exit                    " << kuningTerang << "|"  << endl;
+                    cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << "Masukkan Input ---- : ";
+                    cout << navy << "Masukkan Input [1-2] : " << reset;
                     cin >> pilihan;
 
                     try {
