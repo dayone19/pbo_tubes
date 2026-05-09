@@ -4,10 +4,11 @@ Patient::Patient() : Person("", "", "") {
 }
 
 Patient::Patient(string nama, string id, string alamat)
-    : Person(nama, id, alamat) {}
+    : Person(nama, id, alamat), diagnosis("-"), diagnosed(false), paid(false){}
 
 void Patient::setDiagnosis(string d) {
     diagnosis = d;
+    diagnosed = true; 
 }
 
 string Patient::getDiagnosis() {
@@ -20,6 +21,19 @@ string Patient::getID() {
 
 string Patient::getNama() {
     return nama;
+}
+
+bool Patient::isDiagnosed() { 
+    return diagnosed; 
+}
+
+bool Patient::isPaid() { 
+    return paid; 
+    
+}
+    
+void Patient::setPaid(bool status) { 
+    paid = status; 
 }
 
 void Patient::displayInfo() {

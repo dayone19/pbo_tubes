@@ -47,15 +47,18 @@ class Person {
 class Patient : public Person {
     private:
     string diagnosis;
+    bool diagnosed;
+    bool paid;
 
     public:
     Patient() : Person("", "", "") {}
 
     Patient (string nama, string id, string alamat)
-    : Person(nama, id, alamat), diagnosis("-") {}
+    : Person(nama, id, alamat), diagnosis("-"), diagnosed(false), paid(false) {}
 
     void setDiagnosis(string d) {
         diagnosis = d;
+        diagnosed = true; 
     }
 
     string getDiagnosis() {
@@ -68,6 +71,19 @@ class Patient : public Person {
 
     string getNama() {
         return nama;
+    }
+
+    bool isDiagnosed() { 
+        return diagnosed; 
+    }
+
+    bool isPaid() { 
+        return paid; 
+    
+    }
+
+    void setPaid(bool status) { 
+        paid = status; 
     }
 
     void displayInfo() override {
@@ -243,19 +259,58 @@ class Database {
 //gretha buat file hendling
 class FileHandler {
 public:
-    static void log(string text) {
-       
+     static void log(string text) {
+        ofstream file("hospital_log.txt", ios::app);
+        file << text << endl;
+        file.close();
     }
 
     static void savePatient(Patient p) {
-       
+        ofstream file("hospital_log.txt", ios::app);
+        file << "[PATIENT] "
+             << p.getID() << " | "
+             << p.getNama() << " | "
+             << p.getDiagnosis() << endl;
+        file.close();
     }
 
     static void saveBinary(Patient p) {
+        ofstream file("medical_record.dat", ios::binary | ios::app);
+
+        int len = p.getNama().length();
+        file.write((char*)&len, sizeof(len));
+        file.write(p.getNama().c_str(), len);
+
+        string diag = p.getDiagnosis();
+        len = diag.length();
+        file.write((char*)&len, sizeof(len));
+        file.write(diag.c_str(), len);
+
+        file.close();
     }
 
     static void readBinary() {
+        ifstream file("medical_record.dat", ios::binary);
 
+        while (true) {
+            int len;
+            file.read((char*)&len, sizeof(len));
+            if (file.eof()) break;
+
+            char nama[100];
+            file.read(nama, len);
+            nama[len] = '\0';
+
+            file.read((char*)&len, sizeof(len));
+            char diagnosis[100];
+            file.read(diagnosis, len);
+            diagnosis[len] = '\0';
+
+            cout << "Nama: " << nama
+                 << " | Diagnosis: " << diagnosis << endl;
+        }
+
+        file.close();
     }
 };
 
@@ -335,7 +390,7 @@ int main() {
 
                             FileHandler::log("Registrasi: " + nama);
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
-                            
+                            cout << "-----    REGISTRASI BERHASIL     -----" << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
 
                         } else if(pilihan == 2) {
@@ -361,13 +416,65 @@ int main() {
                         } else if(pilihan == 3) {
                             system("cls");
 
-                            cout << "----- PEMBAYARAN  -----" << endl;
-                            Billing b1(100000);
-                            Billing b2(50000);
+                            string id;
+                            cout << "Masukkan ID Pasien: ";
+                            cin >> id;
 
-                            Billing total = b1 + b2;
+                            Patient* p = db.find(id);
 
+                            if (p == NULL)
+                                throw CustomException("Pasien tidak ditemukan!");
+
+                            if (!p->isDiagnosed()) {
+                                throw CustomException("Pasien belum didiagnosis, tidak bisa melakukan pembayaran!");
+                            }
+                            if (p->isPaid()) {
+                                throw CustomException("Pasien sudah melakukan pembayaran!");
+                            }
+
+                            Doctor* d;
+                            int jenis;
+
+                            cout << "1. Dokter Umum\n2. Spesialis\nPilih: ";
+                            cin >> jenis;
+
+                            if (jenis == 1)
+                                d = new DoctorGeneral("Dr.A", "D1", "Medan");
+                            else
+                                d = new DoctorSpecialist("Dr.B", "D2", "Medan");
+
+                            double biayaObat;
+                            cout << "Masukkan biaya obat: ";
+                            cin >> biayaObat;
+
+                            if (biayaObat < 0)
+                                throw CustomException("Biaya obat tidak valid!");
+
+                            double biayaDokter = d->calculateFee();
+
+                            cout << "\n=== DETAIL BIAYA ===\n";
+                            cout << "Nama Pasien       : " << p->getNama() << endl;
+                            cout << "Nama Dokter       : " << d->getNama() << endl;
+                            cout << "Biaya Konsultasi  : Rp " << biayaDokter << endl;
+                            cout << "Biaya Obat        : Rp " << biayaObat << endl;
+
+                            Billing total = Billing(biayaDokter) + Billing(biayaObat);
+
+                            cout << "--------------------------\n";
                             cout << total << endl;
+
+                            p->setPaid(true);
+                            queue.removeQueue(id);
+
+
+                            FileHandler::log("Pembayaran pasien: " + p->getNama());
+
+                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+                            cout << "-----    PEMBAYARAN BERHASIL     -----" << endl;
+                            cout << "----  Pasien Keluar Dari Antrian  ----" << endl;
+                            cout << "++++++++++++++++++++++++++++++++++++++" << endl;
+
+                            delete d;
 
                         } else if(pilihan == 4) {
                             system("cls");
@@ -381,7 +488,6 @@ int main() {
                             for (int i = 0; i < staffList.size(); i++) {
                                 staffList[i].displayInfo();
 
-                                cout << "============================ " << endl;
                             }
 
                         } else if(pilihan == 6) {
@@ -455,6 +561,11 @@ int main() {
 
                             if (p == NULL)
                                 throw CustomException("Data tidak ditemukan!");
+
+                            if (p->isPaid()) {
+                                throw CustomException("Pasien sudah keluar dari karena sudah melakukan pembayaran!");
+                            }
+
 
                             p->displayInfo();
 

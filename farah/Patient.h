@@ -9,6 +9,8 @@ using namespace std;
 class Patient : public Person {
     private:
         string diagnosis;
+        bool diagnosed;
+        bool paid;
 
     public:
         Patient(); // konstruktor default
@@ -19,6 +21,10 @@ class Patient : public Person {
 
         string getID();
         string getNama();
+
+        bool isDiagnosed();
+        bool isPaid();
+        void setPaid(bool status);
 
         void displayInfo() override;
 };
