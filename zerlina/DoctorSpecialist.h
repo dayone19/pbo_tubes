@@ -1,7 +1,7 @@
 #ifndef DOCTORSPECIALIST_H
 #define DOCTORSPECIALIST_H
 
-#include "Doctor.h"
+#include "../farah/Doctor.h"
 #include <iostream>
 #include <string>
 using namespace std;

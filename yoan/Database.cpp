@@ -1,4 +1,5 @@
 #include "Database.h"
+#include "../farah/Patient.h"
 
 template <typename T>
     void Database<T>::add(string id, T obj) {
@@ -18,3 +19,4 @@ template class Database<string>;
 template class Database<double>;
 template class Database<float>;
 template class Database<char>;
+template class Database<Patient>;

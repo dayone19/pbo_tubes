@@ -1,9 +1,5 @@
 Registrasi: Deyoan
-Registrasi: adelide
-Pembayaran pasien: adelide
-[PATIENT] 3 | adelide | pusing
-Registrasi: hai
-[PATIENT] 5 | hai | pusing
-Registrasi: oyen
-[PATIENT] 67 | oyen | sakit
-Pembayaran pasien: oyen
+[PATIENT] 19 | Deyoan | Pusing
+Registrasi: salik
+[PATIENT] 00 | salik | sakit
+Pembayaran pasien: salik

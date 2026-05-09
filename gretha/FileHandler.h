@@ -1,7 +1,7 @@
 #ifndef FILEHANDLER_H
 #define FILEHANDLER_H
 
-#include "Patient.h"
+#include "../farah/Patient.h"
 #include <string>
 #include <fstream>
 #include <iostream>

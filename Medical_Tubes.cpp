@@ -389,6 +389,7 @@ int main() {
                             db.add(id, p);
 
                             FileHandler::log("Registrasi: " + nama);
+                            cout << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----    REGISTRASI BERHASIL     -----" << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
@@ -409,6 +410,7 @@ int main() {
                             appointments.push_back(Appointment(id, "Dokter Spesialis"));
                             queue.addQueue(id);
 
+                            cout << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----  TAMBAH ANTRIAN BERHASIL   -----" << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
@@ -469,6 +471,7 @@ int main() {
 
                             FileHandler::log("Pembayaran pasien: " + p->getNama());
 
+                            cout << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----    PEMBAYARAN BERHASIL     -----" << endl;
                             cout << "----  Pasien Keluar Dari Antrian  ----" << endl;
@@ -545,6 +548,7 @@ int main() {
                             FileHandler::savePatient(*p);
                             FileHandler::saveBinary(*p);
 
+                            cout << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----   SET DIAGNOSIS BERHASIL   -----" << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << endl;
