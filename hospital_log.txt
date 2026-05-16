@@ -18,3 +18,6 @@ Registrasi: Joko
 [PATIENT] 3 | Joko | Demam
 Registrasi: Syafiq
 Pembayaran pasien: Joko
+Registrasi: NaydilaKeja
+[PATIENT] 12 | NaydilaKeja | Batuk
+Registrasi: yona

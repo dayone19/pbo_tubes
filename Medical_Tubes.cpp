@@ -119,7 +119,9 @@ public:
     DoctorGeneral(string nama, string id, string alamat)
         : Doctor(nama, id, alamat) {}
 
-    double calculateFee() override { return 100000; }
+    double calculateFee() override { 
+        return 100000; 
+    }
 
     void displayInfo() {
         cout << hijauTerang << "======= Dokter Umum =======\n" << reset;
@@ -132,7 +134,9 @@ public:
     DoctorSpecialist(string nama, string id, string alamat)
         : Doctor(nama, id, alamat) {}
 
-    double calculateFee() override { return 200000; }
+    double calculateFee() override {
+         return 200000; 
+    }
 
     void displayInfo() {
          cout << hijauTerang << "======= Dokter Spesialis =======\n" << reset;
@@ -266,12 +270,14 @@ class Database {
 //gretha buat file hendling
 class FileHandler {
 public:
-     static void log(string text) {
-        ofstream file("hospital_log.txt", ios::app);
+    //untuk registrasi
+    static void log(string text) {
+        ofstream file("hospital_log.txt", ios::app); //app untuk menulis setelah baris terakhir di file
         file << text << endl;
         file.close();
     }
 
+    //kalo udah di diagnosis
     static void savePatient(Patient p) {
         ofstream file("hospital_log.txt", ios::app);
         file << "[PATIENT] "
@@ -281,6 +287,7 @@ public:
         file.close();
     }
 
+    //untuk menyimpan seluruh data rekam medis
     static void saveBinary(Patient p) {
         ofstream file("medical_record.dat", ios::binary | ios::app);
 
@@ -306,12 +313,13 @@ public:
 
             char nama[100];
             file.read(nama, len);
-            nama[len] = '\0';
+            nama[len] = '\0';//biar sistem tau tipe data nya string
 
             file.read((char*)&len, sizeof(len));
+            //iftream binary gabole string, jadi dibuat char dulu untuh wadah nya
             char diagnosis[100];
             file.read(diagnosis, len);
-            diagnosis[len] = '\0';
+            diagnosis[len] = '\0'; //disini baru kasih tau ke sistem kalau ini adalah string
 
             cout << "Nama: " << nama
                  << " | Diagnosis: " << diagnosis << endl;
@@ -341,7 +349,7 @@ class CustomException {
 int main() {
     Database<Patient> db; //objek untuk database
     QueueSystem queue; //untuk queue
-    vector<Appointment> appointments; //untuk antrin
+    vector<Appointment> appointments; //untuk antrian
 
     vector<StaffAdmin> staffList; //membaca staf pakai vector
     staffList.push_back(StaffAdmin("Admin1", "A1", "Medan"));
@@ -479,7 +487,7 @@ int main() {
 
 
                             FileHandler::log("Pembayaran pasien: " + p->getNama());
-
+ 
                             cout << endl;
                             cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----" << putih << "    PEMBAYARAN BERHASIL     " << turquoise << "-----" << endl;
