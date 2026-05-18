@@ -374,6 +374,7 @@ int main() {
         cin >> role;
 
         if (role == 1) {
+            system("cls");
             do {
 
                     cout << kuningTerang << "\n ================================ " << reset << endl;
@@ -530,7 +531,7 @@ int main() {
                 } while(pilihan != 7);
 
         } else if(role == 2) {
-
+            system("cls");
             do {
                     cout << kuningTerang << "\n ============================ " << reset << endl;
                     cout << kuningTerang << "|" << peach << "  -- ++ DOCTOR  PAGE ++ --  " << kuningTerang << "|" << reset << endl;
@@ -605,7 +606,7 @@ int main() {
             } while(pilihan != 4);
 
         } else if(role == 3) {
-
+            system("cls");
             do {
                     cout << kuningTerang << "\n ============================ " << reset << endl;
                     cout << kuningTerang << "|" << peach << "  -- ++ PATIENT PAGE ++ --  " << kuningTerang << "|" << reset << endl;
