@@ -523,7 +523,9 @@ int main() {
                                 cout << line << endl;
                             }
                             file.close();
-                        } 
+                        } else if(pilihan == 7) {
+                            system("cls");
+                        }
                         
                     } catch (CustomException e) {
                         cout << "ERROR: " << e.getMessage() << endl;
@@ -597,6 +599,8 @@ int main() {
                             cout << hijauTerang << "================================ " << endl;
                             cout << " -- ++ " << cyanTerang << "   REKAM MEDIS   " << hijauTerang << " ++ --  " << reset << endl;
                             FileHandler::readBinary();
+                        } else if(pilihan == 4) {
+                            system("cls");
                         }
 
                     } catch (CustomException e) {
@@ -624,13 +628,17 @@ int main() {
                             system("cls");
                             queue.showQueue();
 
-                        } 
+                        } else if(pilihan == 2) {
+                            system("cls");
+                        }
 
                     } catch (CustomException e) {
                         cout << "ERROR: " << e.getMessage() << endl;
                     }
 
             } while(pilihan != 2);
+        } else if(role == 4) {
+         
         }
 
     } while(role != 4);
