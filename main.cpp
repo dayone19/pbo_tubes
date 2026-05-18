@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip> 
 #include "color.h"
 using namespace std;
 
@@ -27,7 +28,7 @@ using namespace std;
 int main() {
     Database<Patient> db; //objek untuk database
     QueueSystem queue; //untuk queue
-    vector<Appointment> appointments; //untuk antrin
+    vector<Appointment> appointments; //untuk antrian
 
     vector<StaffAdmin> staffList; //membaca staf pakai vector
     staffList.push_back(StaffAdmin("Admin1", "A1", "Medan"));
@@ -52,6 +53,7 @@ int main() {
         cin >> role;
 
         if (role == 1) {
+            system("cls");
             do {
 
                     cout << kuningTerang << "\n ================================ " << reset << endl;
@@ -80,6 +82,10 @@ int main() {
                             cout << "ID Pasien     : "; cin >> id;
                             cout << "Alamat Pasien : "; cin >> alamat;
 
+                            if (db.exists(id)) {
+                                throw CustomException("ID Pasien '" + id + "' sudah terdaftar! Gunakan ID lain.");
+                            }
+
                             Patient p(nama, id, alamat);
                             db.add(id, p);
 
@@ -91,7 +97,8 @@ int main() {
 
                         } else if(pilihan == 2) {
                             system("cls");
-                            string id;
+                            string id, namaDokter;
+                            int jenisDokter;
 
                             cout << lavender << "----- " << kuningTerang << "TAMBAH ANTRIAN" << lavender << " -----" << reset << endl;
                             cout << "Masukkan ID Pasien : ";
@@ -102,8 +109,21 @@ int main() {
                             if (p == NULL)
                                 throw CustomException("Pasien tidak ditemukan!");
 
-                            appointments.push_back(Appointment(id, "Dokter Spesialis"));
-                            queue.addQueue(id);
+                            cout << "Pilih Jenis Dokter:\n1. Dokter Umum\n2. Dokter Spesialis\nPilih [1-2]: ";
+                            cin >> jenisDokter;
+                            cout << "Masukkan Nama Dokter: ";
+                            cin >> namaDokter;
+
+                            Doctor* d = NULL;
+                            if (jenisDokter == 1) {
+                                d = new DoctorGeneral(namaDokter, "D-UMUM", "Rumah Sakit");
+                            } else if (jenisDokter == 2) {
+                                d = new DoctorSpecialist(namaDokter, "D-SPESIALIS", "Rumah Sakit");
+                            } else {
+                                throw CustomException("Pilihan dokter tidak valid!");
+                            }
+
+                            queue.addQueue(id, d);
 
                             cout << endl;
                             cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
@@ -129,16 +149,11 @@ int main() {
                                 throw CustomException("Pasien sudah melakukan pembayaran!");
                             }
 
-                            Doctor* d;
-                            int jenis;
-
-                            cout << "1. Dokter Umum\n2. Spesialis\nPilih: ";
-                            cin >> jenis;
-
-                            if (jenis == 1)
-                                d = new DoctorGeneral("Dr.A", "D1", "Medan");
-                            else
-                                d = new DoctorSpecialist("Dr.B", "D2", "Medan");
+                            // Mengambil data dokter langsung dari sistem antrian (Tanpa Input Ulang)
+                            Doctor* d = queue.getDoctorFromQueue(id);
+                            if (d == NULL) {
+                                throw CustomException("Data dokter untuk pasien ini tidak ditemukan di antrian!");
+                            }
 
                             double biayaObat;
                             cout << "Masukkan biaya obat: ";
@@ -149,7 +164,7 @@ int main() {
 
                             double biayaDokter = d->calculateFee();
 
-                            cout << unguMuda << "\n========= DETAIL BIAYA =========\n" << reset << endl;
+                            cout << unguMuda << "\n========== DETAIL BIAYA ==========\n" << reset << endl;
                             cout << "Nama Pasien       : " << p->getNama() << endl;
                             cout << "Nama Dokter       : " << d->getNama() << endl;
                             cout << "Biaya Konsultasi  : Rp " << biayaDokter << endl;
@@ -157,22 +172,20 @@ int main() {
 
                             Billing total = Billing(biayaDokter) + Billing(biayaObat);
 
-                            cout << unguMuda << "--------------------------------\n" << reset << endl;
+                            cout << unguMuda << "-------------------------------\n" << reset << endl;
                             cout << total << endl;
 
                             p->setPaid(true);
-                            queue.removeQueue(id);
-
 
                             FileHandler::log("Pembayaran pasien: " + p->getNama());
-
+ 
                             cout << endl;
                             cout << turquoise << "++++++++++++++++++++++++++++++++++++++" << endl;
                             cout << "-----" << putih << "    PEMBAYARAN BERHASIL     " << turquoise << "-----" << endl;
                             cout << "----" << putih << "  Pasien Keluar Dari Antrian  " << turquoise << "----" << endl;
                             cout << "++++++++++++++++++++++++++++++++++++++" << reset << endl;
 
-                            delete d;
+                            queue.removeQueue(id);
 
                         } else if(pilihan == 4) {
                             system("cls");
@@ -200,7 +213,9 @@ int main() {
                                 cout << line << endl;
                             }
                             file.close();
-                        } 
+                        } else if(pilihan == 7) {
+                            system("cls");
+                        }
                         
                     } catch (CustomException e) {
                         cout << "ERROR: " << e.getMessage() << endl;
@@ -208,7 +223,7 @@ int main() {
                 } while(pilihan != 7);
 
         } else if(role == 2) {
-
+            system("cls");
             do {
                     cout << kuningTerang << "\n ============================ " << reset << endl;
                     cout << kuningTerang << "|" << peach << "  -- ++ DOCTOR  PAGE ++ --  " << kuningTerang << "|" << reset << endl;
@@ -237,6 +252,10 @@ int main() {
                             if (p == NULL)
                                 throw CustomException("Pasien tidak ditemukan!");
 
+                            if (p->isDiagnosed()) {
+                                throw CustomException("Pasien sudah didiagnosis sebelumnya!");
+                            }
+
                             cout << "Diagnosis Pasien : ";
                             cin >> diag;
 
@@ -263,7 +282,7 @@ int main() {
                                 throw CustomException("Data tidak ditemukan!");
 
                             if (p->isPaid()) {
-                                throw CustomException("Pasien sudah keluar dari karena sudah melakukan pembayaran!");
+                                throw CustomException("Pasien sudah keluar dari rumah sakit karena sudah melakukan pembayaran!");
                             }
 
 
@@ -271,9 +290,96 @@ int main() {
 
                         } else if(pilihan == 3) {
                             system("cls");
-                            cout << hijauTerang << "================================ " << endl;
-                            cout << " -- ++ " << cyanTerang << "   REKAM MEDIS   " << hijauTerang << " ++ --  " << reset << endl;
-                            FileHandler::readBinary();
+
+                            cout << hijauTerang << "=====================================================================================" << endl;
+                            cout << " -- ++ " << cyanTerang << "                           REKAM MEDIS    PASIEN                       " << hijauTerang << " ++ --  " << reset << endl;
+                            cout << hijauTerang << "=====================================================================================" << endl;
+
+                            // buka file binary
+                            ifstream file("medical_record.dat", ios::binary);
+
+                            if (!file) {
+                                cout << magentaTerang << "[!] Belum ada data rekam medis yang tersimpan." << reset << endl;
+                            } else {
+                                cout << cyanTerang
+                                    << "+" << string(20, '-')
+                                    << "+" << string(30, '-')
+                                    << "+" << string(32, '-')
+                                    << "+" << reset << endl;
+
+                                cout << cyanTerang
+                                    << "| " << left << setw(18) << "ID PASIEN"
+                                    << "| " << left << setw(28) << "NAMA PASIEN"
+                                    << "| " << left << setw(33) << "DIAGNOSIS"
+                                    << "|" << reset << endl;
+
+                                cout << cyanTerang
+                                    << "+" << string(20, '-')
+                                    << "+" << string(30, '-')
+                                    << "+" << string(32, '-')
+                                    << "+" << reset << endl;
+
+                                bool adaData = false;
+
+                                while (true) {
+
+                                    int len;
+
+                                    file.read((char*)&len, sizeof(len));
+
+                                    if (file.eof())
+                                        break;
+
+                                    adaData = true;
+
+                                    char idPasien[100];
+                                    file.read(idPasien, len);
+                                    idPasien[len] = '\0';
+
+                                    file.read((char*)&len, sizeof(len));
+
+                                    char nama[100];
+                                    file.read(nama, len);
+                                    nama[len] = '\0';
+
+                                    file.read((char*)&len, sizeof(len));
+
+                                    char diagnosis[100];
+                                    file.read(diagnosis, len);
+                                    diagnosis[len] = '\0';
+
+                                    string diagText = diagnosis;
+
+                                    if (diagText.length() > 28) {
+                                        diagText = diagText.substr(0, 27) + ".";
+                                    }
+
+                                    cout << cyanTerang
+                                         << "| " << reset << left << setw(18) << idPasien
+                                         << cyanTerang
+                                         << "| " << reset << left << setw(28) << nama
+                                         << cyanTerang
+                                         << "| " << reset << left << setw(33) << diagText
+                                         << cyanTerang
+                                         << "|" << reset << endl;
+                                }
+
+                                cout << cyanTerang
+                                    << "+" << string(20, '-')
+                                    << "+" << string(30, '-')
+                                    << "+" << string(32, '-')
+                                    << "+" << reset << endl;
+
+                                if (!adaData) {
+                                    cout << magentaTerang << "[!] File rekam medis kosong." << reset << endl;
+                                }
+
+                                file.close();
+                            }
+                            
+                            
+                        } else if(pilihan == 4) {
+                            system("cls");
                         }
 
                     } catch (CustomException e) {
@@ -283,7 +389,7 @@ int main() {
             } while(pilihan != 4);
 
         } else if(role == 3) {
-
+            system("cls");
             do {
                     cout << kuningTerang << "\n ============================ " << reset << endl;
                     cout << kuningTerang << "|" << peach << "  -- ++ PATIENT PAGE ++ --  " << kuningTerang << "|" << reset << endl;
@@ -301,13 +407,17 @@ int main() {
                             system("cls");
                             queue.showQueue();
 
-                        } 
+                        } else if(pilihan == 2) {
+                            system("cls");
+                        }
 
                     } catch (CustomException e) {
                         cout << "ERROR: " << e.getMessage() << endl;
                     }
 
             } while(pilihan != 2);
+        } else if(role == 4) {
+         
         }
 
     } while(role != 4);

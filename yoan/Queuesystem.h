@@ -4,14 +4,16 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Appointment.h"
 using namespace std;
 
 class QueueSystem {
     public:
-        vector<string> antrian;
+        vector<Appointment> antrian;
 
-        void addQueue(string id);
+        void addQueue(string id, Doctor* d);
         void showQueue();
+        Doctor* getDoctorFromQueue(string id);
         void removeQueue(string id);
 };
 

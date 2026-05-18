@@ -1,23 +1,2 @@
-
-
-Registrasi: Akbar
-Registrasi: Tezza
-Registrasi: Kinja
-Registrasi: Akbar
-Registrasi: Tezza
-Registrasi: Kinja
-[PATIENT] 21 | Akbar | Demam
-[PATIENT] 22 | Tezza | Pilek
-[PATIENT] 23 | Kinja | Batuk
-Registrasi: Yoana
-[PATIENT] 1 | Yoana | Batuk
-Registrasi: Yoan
-[PATIENT] 2 | Yoan | Pilek
-Pembayaran pasien: Yoan
-Registrasi: Joko
-[PATIENT] 3 | Joko | Demam
-Registrasi: Syafiq
-Pembayaran pasien: Joko
-Registrasi: NaydilaKeja
-[PATIENT] 12 | NaydilaKeja | Batuk
-Registrasi: yona
+Registrasi: yoan
+[PATIENT] 19 | yoan | pusing

@@ -13,6 +13,13 @@ template <typename T>
         return NULL;
 }
 
+template <typename T>
+    bool exists(string id) {
+        // validasi id unique
+            return data.find(id) != data.end();
+}
+
+
 //biar bisa dipakai untuk tipe data lain
 template class Database<int>;
 template class Database<string>;

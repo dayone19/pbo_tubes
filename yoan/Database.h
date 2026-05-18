@@ -13,6 +13,7 @@ class Database {
 
         void add(string id, T obj);
         T* find(string id);
+        bool exists(string id);
 };
 
 #endif

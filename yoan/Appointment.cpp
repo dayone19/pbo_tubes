@@ -1,16 +1,12 @@
 #include "Appointment.h"
 
-Appointment::Appointment(string p, string d) {
+// Implementasi Constructor
+Appointment::Appointment(string p, Doctor* d) {
     patientID = p;
-    doctorName = d;
+    chosenDoctor = d;
 }
 
-string Appointment::getPatientID() {
-    return patientID;
+// Implementasi Destructor
+Appointment::~Appointment() {
+   
 }
-
-string Appointment::getDoctorName() {
-    return doctorName;
-}
-
-
