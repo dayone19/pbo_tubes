@@ -1,2 +1,11 @@
 Registrasi: yoan
 [PATIENT] 19 | yoan | pusing
+Registrasi: yoan
+Registrasi: Yoan
+Registrasi: farah
+Registrasi: farah
+[PATIENT] p01 | farah | demam
+Registrasi: farah
+[PATIENT] p02 | farah | demam
+Registrasi: fara
+[PATIENT] p02 | fara | flu

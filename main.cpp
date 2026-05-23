@@ -49,8 +49,10 @@ int main() {
         cout << cyanTerang << "|" << putih << " 4. Exit                        " << cyanTerang << "|" << reset << endl;
         cout << cyanTerang << " ================================" << reset << endl;
 
-        cout << navy << "Masukkan Input [1-4] : " << reset;
-        cin >> role;
+        role = inputAngka(
+        navy + string("Masukkan Input [1-4] : ") + reset,
+        1, 4
+    );
 
         if (role == 1) {
             system("cls");
@@ -68,8 +70,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 7. Exit                        " << kuningTerang << "|" << reset << endl;
                     cout << kuningTerang << " ================================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-7] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-7] : ") + reset,
+                    1, 7
+                );
 
                     try {
 
@@ -111,8 +115,10 @@ int main() {
 
                             cout << "Pilih Jenis Dokter:\n1. Dokter Umum\n2. Dokter Spesialis\nPilih [1-2]: ";
                             cin >> jenisDokter;
+                            cin.ignore(); 
                             cout << "Masukkan Nama Dokter: ";
-                            cin >> namaDokter;
+                            getline(cin, namaDokter);
+                            cout << "Nama dokter: " << namaDokter << endl;
 
                             Doctor* d = NULL;
                             if (jenisDokter == 1) {
@@ -234,8 +240,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 4. Exit                    " << kuningTerang << "|"  << endl;
                     cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-4] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-4] : ") + reset,
+                    1, 4
+                );
 
                     try {
 
@@ -398,8 +406,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 2. Exit                    " << kuningTerang << "|"  << endl;
                     cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-2] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-2] : ") + reset,
+                    1, 2
+                );
 
                     try {
 

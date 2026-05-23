@@ -14,7 +14,7 @@ template <typename T>
 }
 
 template <typename T>
-    bool exists(string id) {
+    bool Database<T>::exists(string id) {
         // validasi id unique
             return data.find(id) != data.end();
 }

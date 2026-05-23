@@ -19,8 +19,6 @@ void FileHandler::savePatient(Patient p) {
 void FileHandler::saveBinary(Patient p) {
     ofstream file("medical_record.dat", ios::binary | ios::app);
 
-      ofstream file("medical_record.dat", ios::binary | ios::app);
-
         string id = p.getID();
         int len = id.length();
         file.write((char*)&len, sizeof(len));

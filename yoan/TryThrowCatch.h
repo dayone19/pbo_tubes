@@ -1,6 +1,7 @@
 #ifndef CUSTOMEXCEPTION_H
 #define CUSTOMEXCEPTION_H
 
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -15,5 +16,7 @@ public:
     // Getter untuk mengambil pesan error
     string getMessage();
 };
+
+int inputAngka(string pesan, int min, int max);
 
 #endif

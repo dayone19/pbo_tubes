@@ -395,6 +395,38 @@ class CustomException {
         }
 };
 
+    int inputAngka(string pesan, int min, int max) {
+    int angka;
+
+    while (true) {
+        cout << pesan;
+        cin >> angka;
+
+        // kalau input huruf
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+
+            cout << salmon
+                 << "INPUT TIDAK VALID!! Masukkan angka.\n"
+                 << reset;
+        }
+
+        // kalau angka di luar pilihan
+        else if (angka < min || angka > max) {
+            cout << salmon
+                 << "INPUT TIDAK VALID!! Pilih "
+                 << min << "-" << max << ".\n"
+                 << reset;
+        }
+
+        // input benar
+        else {
+            return angka;
+        }
+    }
+}
+
 int main() {
     Database<Patient> db; //objek untuk database
     QueueSystem queue; //untuk queue
@@ -419,8 +451,10 @@ int main() {
         cout << cyanTerang << "|" << putih << " 4. Exit                        " << cyanTerang << "|" << reset << endl;
         cout << cyanTerang << " ================================" << reset << endl;
 
-        cout << navy << "Masukkan Input [1-4] : " << reset;
-        cin >> role;
+        role = inputAngka(
+        navy + string("Masukkan Input [1-4] : ") + reset,
+        1, 4
+    );
 
         if (role == 1) {
             system("cls");
@@ -438,8 +472,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 7. Exit                        " << kuningTerang << "|" << reset << endl;
                     cout << kuningTerang << " ================================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-7] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-7] : ") + reset,
+                    1, 7
+                );
 
                     try {
 
@@ -481,8 +517,10 @@ int main() {
 
                             cout << "Pilih Jenis Dokter:\n1. Dokter Umum\n2. Dokter Spesialis\nPilih [1-2]: ";
                             cin >> jenisDokter;
+                            cin.ignore(); 
                             cout << "Masukkan Nama Dokter: ";
-                            cin >> namaDokter;
+                            getline(cin, namaDokter);
+                            cout << "Nama dokter: " << namaDokter << endl;
 
                             Doctor* d = NULL;
                             if (jenisDokter == 1) {
@@ -604,8 +642,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 4. Exit                    " << kuningTerang << "|"  << endl;
                     cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-4] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-4] : ") + reset,
+                    1, 4
+                );
 
                     try {
 
@@ -768,8 +808,10 @@ int main() {
                     cout << kuningTerang << "|" << putih << " 2. Exit                    " << kuningTerang << "|"  << endl;
                     cout << kuningTerang << " ============================ " << reset << endl;
 
-                    cout << navy << "Masukkan Input [1-2] : " << reset;
-                    cin >> pilihan;
+                    pilihan = inputAngka(
+                    navy + string("Masukkan Input [1-2] : ") + reset,
+                    1, 2
+                );
 
                     try {
 
